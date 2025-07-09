@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redmond USPS: Speak the Truth</title>
+    <meta name="description" content="A private, protected portal for USPS employees to submit witness statements against abusive management. Your voice is protected.">
+    <meta property="og:title" content="Redmond USPS: Speak the Truth">
+    <meta property="og:description" content="You're not alone. Your voice is protected. Submit a private statement.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="YOUR_LANDING_PAGE_URL_HERE"> <style>
+        :root {
+            --primary-color: #005f7f; /* Dark blue, similar to USPS but slightly softer */
+            --secondary-color: #e0f2f7; /* Light blue for background elements */
+            --text-color: #333;
+            --white: #fff;
+            --red-alert: #d9534f; /* For warnings */
+            --button-green: #4CAF50;
+            --button-green-hover: #45a049;
+        }
+
+        /* Basic Reset & Box Sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top on larger screens */
+            min-height: 100vh; /* Ensure it takes full viewport height */
+            padding-bottom: 20px; /* Add some space at the bottom */
+        }
+
+        .container {
+            max-width: 800px;
+            width: 95%; /* Responsive width for all screen sizes */
+            margin: 20px auto; /* Centered with vertical margin */
+            background: var(--white);
+            padding: 20px; /* Adjusted padding for mobile */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.3; /* Better readability for headings */
+        }
+
+        h1 {
+            font-size: 1.8em; /* Base font size for mobile */
+        }
+
+        h2 {
+            font-size: 1.5em; /* Base font size for mobile */
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1em; /* Base font size */
+        }
+
+        ul {
+            padding-left: 20px; /* Ensure lists are indented properly */
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .top-section, .final-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 25px 20px; /* Increased vertical padding */
+            border-radius: 6px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .top-section h1 {
+            color: var(--white);
+            font-size: 2em; /* Slightly larger in top section */
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .top-section .subhead {
+            font-weight: 500;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 8px; /* Tighter spacing for subheads */
+        }
+        .top-section .subhead:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-divider {
+            border: 0;
+            height: 1px;
+            background-color: #eee;
+            margin: 40px 0; /* Consistent spacing */
+        }
+
+        .columns {
+            display: flex;
+            flex-direction: column; /* Stack columns by default on mobile */
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .column {
+            flex: 1;
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .column h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .social-proof {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px 20px; /* Increased vertical padding */
+            background-color: #f9f9f9;
+            border-radius: 6px;
+        }
+
+        .social-proof p {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .quote {
+            font-style: italic;
+            margin: 10px 0;
+            color: #555;
+            font-size: 0.95em; /* Slightly smaller for quotes */
+        }
+
+        .form-section {
+            padding: 20px;
+            background-color: #fdfdfd;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            margin-top: 0;
+        }
+
+        .final-section p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: block; /* Make button full width on mobile */
+            background-color: var(--button-green);
+            color: var(--white);
+            padding: 15px 20px; /* Consistent padding */
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 100%; /* Full width on mobile */
+            max-width: 300px; /* Max width for larger screens if not full container */
+            margin: 20px auto 0 auto; /* Center button horizontally */
+        }
+
+        .button:hover {
+            background-color: var(--button-green-hover);
+        }
+
+        /* Subtle icon for safety/protection - needs an actual image URL */
+        /* You'd replace 'URL_TO_PROTECTION_ICON.png' with an actual image file */
+        .protection-icon {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+            width: 28px; /* Slightly larger for visibility */
+            height: 28px;
+            background-image: url('URL_TO_PROTECTION_ICON.png'); /* Replace with actual URL to a shield/lock/privacy icon */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+        /* Media query for larger screens (e.g., tablets and desktops) */
+        @media (min-width: 600px) {
+            h1 {
+                font-size: 2.5em; /* Larger heading on desktop */
+            }
+            h2 {
+                font-size: 2em; /* Larger heading on desktop */
+            }
+            .container {
+                padding: 30px; /* Restore original padding for larger screens */
+            }
+            .columns {
+                flex-direction: row; /* Columns side-by-side on larger screens */
+            }
+            .button {
+                display: inline-block; /* Back to inline-block for desktop */
+                width: auto; /* Allow button to size naturally */
+                padding: 15px 30px; /* Original padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <section class="top-section">
+            <h1><span class="protection-icon"></span> You’re Not Alone. Your Voice Is Protected.</h1>
+            <p class="subhead">This is not a lawsuit.</p>
+            <p class="subhead">This is not public.</p>
+            <p class="subhead">This is not traceable by USPS.</p>
+            <p class="subhead">This is a private, protected witness statement to help remove abusive management.</p>
+        </section>
+
+        <hr class="section-divider">
+
+        <h2>What This Is (and Isn’t)</h2>
+        <div class="columns">
+            <div class="column">
+                <h3>What This Is</h3>
+                <ul>
+                    <li>A private form to confirm what you witnessed or experienced</li>
+                    <li>Part of a formal federal EEO complaint that’s already filed</li>
+                    <li>Your chance to stand with others who are speaking up</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>What This Isn’t</h3>
+                <ul>
+                    <li>Not a lawsuit</li>
+                    <li>Not shared with USPS unless legally required</li>
+                    <li>Not public or on record unless you choose</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <section class="social-proof">
+            <h2>Your Voice Matters</h2>
+            <p><strong>Already 12 carriers have submitted.</strong> We’re stronger together.</p>
+            <p class="quote">“I saw it too. Finally someone’s standing up.”</p>
+            <p class="quote">“I never reported it, but they did the same thing to me.”</p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="form-section">
+            <h2>Submit Your Statement</h2>
+            <p>They count on silence. We count on each other.</p>
+            <p>It takes 2 minutes. It could change everything.</p>
+
+            <p style="text-align: center; margin-top: 30px;">
+                <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" rel="noopener noreferrer" class="button">Submit My Statement</a>
+            </p>
+
+            </section>
+
+        <hr class="section-divider">
+
+        <section class="final-section">
+            <p>They count on silence. We count on each other.</p>
+            <p>Submit your statement. It takes 2 minutes. It could change everything.</p>
+            <p style="text-align: center;">
+                 <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" rel="noopener noreferrer" class="button">Submit My Statement</a>
+            </p>
+        </section>
+
+    </div>
+</body>
+</html>
