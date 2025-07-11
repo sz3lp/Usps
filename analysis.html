@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USPS EEO Complaint Interactive Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Consistent with Submit Statement Page (Blue, Green, Gray) -->
+    <!-- Application Structure Plan: The application uses a thematic, single-page dashboard structure. It guides the user from a high-level overview of the EEO landscape, through an interactive visualization of the complaint process, into a detailed analysis of successful vs. unsuccessful case factors, and concludes with actionable strategic advice. This structure was chosen to transform the dense report into an intuitive, task-oriented tool. Users can immediately grasp the core challenges, understand the procedural journey, and explore specific evidence types or procedural failures without reading the entire document linearly, making the information more accessible and strategically useful. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: FY2021 Complaint stats vs. Findings. Goal: Compare. Viz: Doughnut Chart. Interaction: Tooltips. Justification: Visually dramatizes the gap between complaints filed and successful findings, a core theme of the report. Library: Chart.js.
+        - Report Info: EEO Complaint Process. Goal: Organize. Viz: HTML/CSS Flowchart. Interaction: Click to expand details/timelines. Justification: Simplifies the complex, multi-stage legal process into an easy-to-follow, interactive map. Library/Method: HTML/CSS/JS.
+        - Report Info: Key evidence types and USPS procedural failures. Goal: Organize/Inform. Viz: Interactive two-column layout. Interaction: Clickable cards revealing detailed text. Justification: Allows users to quickly scan key factors and drill down into specific areas of interest, making the analysis actionable. Library/Method: HTML/CSS/JS.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. 
+    -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container { position: relative; width: 100%; max-width: 400px; margin-left: auto; margin-right: auto; height: 300px; max-height: 400px; }
+        @media (min-width: 640px) { .chart-container { height: 350px; } }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .nav-link.active { border-bottom-color: #3b82f6; color: #1e40af; }
+        /* Adjusted flow-item active state for consistency */
+        .flow-item.active { border-color: #2563eb; background-color: #eff6ff; }
+    </style>
+</head>
+<body class="bg-blue-50 text-gray-800 flex flex-col items-center min-h-screen p-4">
+
+    <nav class="w-full max-w-5xl mx-auto bg-blue-900 text-white p-4 rounded-lg shadow-md mb-8 flex justify-between items-center">
+        <div class="font-bold text-xl">USPS EEO Support</div>
+        <div class="flex space-x-4">
+            <a href="index.html" class="py-2 px-4 rounded-md text-blue-200 hover:bg-blue-700 hover:text-white transition-colors duration-200">Submit Statement</a>
+            <a href="analysis.html" class="py-2 px-4 rounded-md bg-blue-700 text-white font-semibold shadow-sm">EEO Analysis</a>
+        </div>
+    </nav>
+
+    <main class="container max-w-5xl w-full mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8 my-8">
+
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-900">USPS EEO Complaint Analysis</h1>
+            <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">An interactive dashboard for understanding trends, navigating the process, and identifying tactical leverage in USPS EEO filings.</p>
+        </header>
+
+        <section id="overview" class="mb-12 p-6 bg-white rounded-xl shadow-sm">
+             <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">The EEO Landscape: A Tale of Two Numbers</h2>
+             <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                This section highlights the significant disparity between the high volume of harassment and retaliation complaints filed by USPS employees and the very low number of cases that result in a formal finding of discrimination. This gap underscores the difficulty of proving these claims and the importance of a well-prepared case.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="chart-container">
+                    <canvas id="complaintOutcomesChart"></canvas>
+                </div>
+                <div class="space-y-4">
+                    <div class="p-4 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-blue-800">13,250+ Complaints Filed</h3>
+                        <p class="text-blue-700">In FY2021, "Non-Sexual Harassment" (6,721) and "Reprisal/Retaliation" (6,529) were the top two issues alleged in the federal sector, indicating widespread employee distress.</p>
+                    </div>
+                    <div class="p-4 bg-green-50 border-l-4 border-green-600 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-green-800">Only 221 Findings of Discrimination</h3>
+                        <p class="text-green-700">Across the entire federal government, only 221 complaints resulted in a finding of discrimination in FY2021, highlighting a high bar for evidence and successful litigation.</p>
+                    </div>
+                     <div class="p-4 bg-gray-50 border-l-4 border-gray-600 rounded-r-lg">
+                        <h3 class="font-bold text-lg text-gray-800">The Strategic Implication</h3>
+                        <p class="text-gray-700">The data reveals a critical challenge: proving a claim is difficult. Success hinges not just on the validity of the experience but on meticulous documentation and strategic framing of the case.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-200 my-10">
+
+        <section id="process" class="mb-12 p-6 bg-white rounded-xl shadow-sm">
+            <h2 class="text-2xl font-bold text-center mb-2 text-blue-800">The Complaint Journey</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                The federal EEO process is a multi-stage journey with strict timelines. Understanding this path is the first step in navigating it effectively. Click on each stage below to see key details and the average time it adds to the process.
+            </p>
+            <div id="process-flow" class="flex flex-col md:flex-row justify-center items-center md:items-start space-y-4 md:space-y-0 md:space-x-4">
+            </div>
+            <div id="process-details" class="mt-8 p-6 bg-gray-50 rounded-xl shadow-sm min-h-[150px]">
+                <p class="text-gray-500 text-center">Select a stage above to view details.</p>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-200 my-10">
+
+        <section id="analysis" class="mb-12 p-6 bg-white rounded-xl shadow-sm">
+            <h2 class="text-2xl font-bold text-center mb-2 text-blue-800">Why Cases Succeed or Fail</h2>
+             <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                The outcome of an EEO complaint often depends on two key areas: the strength of the evidence presented by the employee and the procedural conduct of the agency. This section breaks down the critical factors that can make or break a case, based on an analysis of past decisions.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-6 bg-white rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-center mb-4 text-green-800">Strengthening Your Claim: Key Evidence</h3>
+                    <div id="strengths-list" class="space-y-3"></div>
+                </div>
+                <div class="p-6 bg-white rounded-xl shadow-sm">
+                    <h3 class="text-xl font-bold text-center mb-4 text-red-800">Common Pitfalls & USPS Failures</h3>
+                    <div id="weaknesses-list" class="space-y-3"></div>
+                </div>
+            </div>
+            <div id="analysis-details-container" class="mt-6"></div>
+        </section>
+
+        <hr class="border-t border-gray-200 my-10">
+
+        <section id="strategy" class="p-6 bg-white rounded-xl shadow-sm">
+            <h2 class="text-2xl font-bold text-center mb-2 text-blue-800">Tactical Leverage Points for Filers</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                Based on the analysis, several key strategies can increase the likelihood of a favorable outcome for employees. These tactics focus on shifting the narrative from isolated incidents to systemic problems and leveraging the agency's own procedural obligations.
+            </p>
+            <div id="strategy-cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center p-6 mt-12 bg-gray-100">
+        <p class="text-sm text-gray-500">This interactive tool is for informational purposes only and does not constitute legal advice. Data is based on the "Analysis of USPS EEO Discrimination Complaints and Federal Court Records" report.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const reportData = {
+                overview: {
+                    labels: ['Harassment & Retaliation Allegations', 'Formal Findings of Discrimination'],
+                    data: [13250, 221],
+                },
+                processFlow: [
+                    {
+                        id: 'counseling',
+                        name: 'Pre-Complaint',
+                        details: '<strong>Timeline: Must contact EEO Counselor within 45 days of incident.</strong><br>This initial, mandatory step involves counseling or Alternative Dispute Resolution (ADR). Many cases are resolved or settled here. ADR has a high success rate (68.1%) when accepted.',
+                        time: '1-3 Months'
+                    },
+                    {
+                        id: 'formal',
+                        name: 'Formal Complaint',
+                        details: '<strong>Timeline: File within 15 days of receiving notice from counselor.</strong><br>A formal complaint is filed with the USPS, not the EEOC. The agency is now required to conduct a formal investigation.',
+                        time: 'Adds ~1 Month'
+                    },
+                    {
+                        id: 'investigation',
+                        name: 'USPS Investigation',
+                        details: '<strong>Timeline: Agency has 180 days to investigate.</strong><br>The USPS investigates the claim. OIG reports show investigators may lack proper training, a key procedural flaw. Average investigation takes ~185 days.',
+                        time: 'Adds ~6 Months'
+                    },
+                    {
+                        id: 'decision',
+                        name: 'Hearing or FAD',
+                        details: '<strong>Timeline: Choose within 30 days of receiving investigation file.</strong><br>You can request a hearing before an EEOC Administrative Judge (AJ) or a Final Agency Decision (FAD) from USPS. An AJ hearing is an adversarial process.',
+                        time: 'Adds 12+ Months'
+                    },
+                    {
+                        id: 'appeal',
+                        name: 'Appeal to EEOC',
+                        details: '<strong>Timeline: Appeal within 30 days of decision.</strong><br>An unfavorable FAD or AJ ruling can be appealed to the EEOC’s Office of Federal Operations (OFO). The average appeal closure takes over a year (~444 days in FY2015).',
+                        time: 'Adds 12-15 Months'
+                    },
+                    {
+                        id: 'court',
+                        name: 'Federal Court',
+                        details: '<strong>Timeline: File within 90 days of final EEOC decision.</strong><br>The final step is to file a civil lawsuit in U.S. District Court. This is a costly and lengthy process, but can result in reversals of agency decisions.',
+                        time: 'Adds 1-2+ Years'
+                    }
+                ],
+                analysis: {
+                    strengths: [
+                        { title: 'Meticulous Documentation', content: 'A detailed paper trail is the single most important factor. Document every incident, date, time, location, witness, and communication. This provides concrete evidence beyond allegations and counters agency denials.' },
+                        { title: 'Witness Statements', content: 'Independent corroboration from colleagues can significantly bolster a claim. Written and signed statements are powerful tools to verify your narrative.' },
+                        { title: 'Medical & Psychological Records', content: 'Evidence of the psychological toll (stress, anxiety, depression) from healthcare professionals demonstrates the "severe or pervasive" nature of a hostile environment and provides quantifiable evidence of harm.' },
+                        { title: 'Comparative Evidence', content: 'Show that similarly situated employees outside your protected class were treated more favorably. This helps establish discriminatory intent rather than just general poor management.' },
+                        { title: 'Leveraging Timeliness', content: 'Strictly adhering to all EEO deadlines (e.g., 45 days for counselor contact) is crucial. Meeting these deadlines prevents your case from being dismissed on procedural grounds, regardless of its merit.' },
+                    ],
+                    weaknesses: [
+                         { title: 'Inadequate Managerial Training', content: 'OIG reports reveal an overwhelming majority of managers conducting initial inquiries lack required training. This systemic failure can be used to argue the agency\'s investigation was flawed from the start.' },
+                        { title: 'Untimely Case Processing', content: 'USPS frequently exceeds the 180-day investigation timeframe. This delay is a procedural failure that grants you the right to request an immediate EEOC hearing, bypassing further agency delays.' },
+                        { title: 'Failure to Follow Internal Policy', content: 'USPS is bound by its own regulations. Any deviation from its stated EEO policies or harassment prevention procedures can be used to establish agency liability.' },
+                        { title: 'Vague or Isolated Complaints', content: 'Claims that lack specific details or focus on "simple teasing, offhand comments, and isolated incidents" are often dismissed for failing to meet the "severe or pervasive" legal standard.' },
+                        { title: 'Missed Deadlines', content: 'The most common reason for procedural dismissal is the failure to contact an EEO counselor within 45 days. This is a strict, unforgiving deadline.' },
+                    ]
+                },
+                strategies: [
+                    {
+                        icon: '⚖️',
+                        title: 'Frame as Systemic Failure',
+                        desc: 'Shift the focus from a single "bad boss" to broader agency negligence, like failure to train managers or address known issues.'
+                    },
+                    {
+                        icon: '📝',
+                        title: 'Weaponize Documentation',
+                        desc: 'Your detailed log of incidents isn\'t just evidence; it\'s leverage. Use it to show a clear pattern the agency ignored.'
+                    },
+                    {
+                        icon: '⏳',
+                        title: 'Use Delays Against Them',
+                        desc: 'If USPS misses the 180-day investigation deadline, immediately exercise your right to move the case to an EEOC hearing.'
+                    },
+                    {
+                        icon: '🤝',
+                        title: 'Strategic Use of ADR',
+                        desc: 'Use Alternative Dispute Resolution for a potentially faster settlement, especially if individual relief is the primary goal.'
+                    },
+                    {
+                        icon: '🔄',
+                        title: 'Focus on Reprisal',
+                        desc: 'Retaliation is the most common EEO claim. Any negative action following EEO activity is a powerful basis for a complaint.'
+                    },
+                    {
+                        icon: '🏢',
+                        title: 'Cite Their Own Rulebook',
+                        desc: 'Hold USPS accountable to its own written policies on harassment and investigations. Proving they violated their own rules is a powerful argument.'
+                    }
+                ]
+            };
+
+            const initApp = () => {
+                renderOverviewChart();
+                renderProcessFlow();
+                renderAnalysisLists();
+                renderStrategyCards();
+                setupEventListeners();
+            };
+
+            const renderOverviewChart = () => {
+                const ctx = document.getElementById('complaintOutcomesChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: reportData.overview.labels,
+                        datasets: [{
+                            data: reportData.overview.data,
+                            backgroundColor: ['#3b82f6', '#22c55e'], /* Blue and Green */
+                            borderColor: ['#3b82f6', '#22c55e'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: { size: 14 },
+                                    color: '#44403c'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += new Intl.NumberFormat('en-US').format(context.parsed);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+            
+            const renderProcessFlow = () => {
+                const container = document.getElementById('process-flow');
+                container.innerHTML = reportData.processFlow.map((item, index) => `
+                    ${index > 0 ? `<div class="hidden md:block text-gray-400 font-sans text-2xl mx-2">→</div>` : ''}
+                    <button data-id="${item.id}" class="flow-item w-full md:w-auto text-center p-3 border-2 border-blue-300 rounded-lg hover:bg-blue-100 hover:border-blue-400 transition-all duration-200">
+                        <span class="font-semibold block">${item.name}</span>
+                        <span class="text-xs text-blue-500">${item.time}</span>
+                    </button>
+                `).join('');
+            };
+
+            const renderAnalysisLists = () => {
+                const strengthsContainer = document.getElementById('strengths-list');
+                const weaknessesContainer = document.getElementById('weaknesses-list');
+
+                strengthsContainer.innerHTML = reportData.analysis.strengths.map((item, index) => `
+                    <button data-type="strength" data-index="${index}" class="analysis-btn w-full text-left p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors duration-200 text-green-800">${item.title}</button>
+                `).join('');
+
+                weaknessesContainer.innerHTML = reportData.analysis.weaknesses.map((item, index) => `
+                    <button data-type="weakness" data-index="${index}" class="analysis-btn w-full text-left p-3 bg-red-50 rounded-lg hover:bg-red-100 transition-colors duration-200 text-red-800">${item.title}</button>
+                `).join('');
+            };
+            
+            const renderStrategyCards = () => {
+                const container = document.getElementById('strategy-cards');
+                container.innerHTML = reportData.strategies.map(card => `
+                    <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+                        <div class="text-3xl mb-3">${card.icon}</div>
+                        <h4 class="font-bold text-lg mb-2 text-gray-800">${card.title}</h4>
+                        <p class="text-gray-600 text-sm">${card.desc}</p>
+                    </div>
+                `).join('');
+            };
+            
+            const setupEventListeners = () => {
+                const processFlowContainer = document.getElementById('process-flow');
+                processFlowContainer.addEventListener('click', (e) => {
+                    const button = e.target.closest('.flow-item');
+                    if (button) {
+                        const allButtons = processFlowContainer.querySelectorAll('.flow-item');
+                        allButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        
+                        const itemId = button.dataset.id;
+                        const itemData = reportData.processFlow.find(item => item.id === itemId);
+                        const detailsContainer = document.getElementById('process-details');
+                        detailsContainer.innerHTML = `<h4 class="font-bold text-lg mb-2 text-gray-800">${itemData.name}</h4><p class="text-gray-600">${itemData.details}</p>`;
+                    }
+                });
+
+                const analysisSection = document.getElementById('analysis');
+                analysisSection.addEventListener('click', (e) => {
+                    const button = e.target.closest('.analysis-btn');
+                    if(button) {
+                        const type = button.dataset.type;
+                        const index = button.dataset.index;
+                        const itemData = (type === 'strength') ? reportData.analysis.strengths[index] : reportData.analysis.weaknesses[index];
+                        
+                        const detailsContainer = document.getElementById('analysis-details-container');
+                        
+                        const bgColor = type === 'strength' ? 'bg-green-50' : 'bg-red-50';
+                        const borderColor = type === 'strength' ? 'border-green-600' : 'border-red-600';
+
+                        detailsContainer.innerHTML = `
+                            <div class="p-4 ${bgColor} border-l-4 ${borderColor} rounded-r-lg shadow-md transition-all duration-300">
+                                <h4 class="font-bold text-lg mb-2 text-gray-800">${itemData.title}</h4>
+                                <p class="text-gray-700">${itemData.content}</p>
+                            </div>`;
+                        
+                        document.querySelectorAll('.analysis-btn').forEach(btn => btn.classList.remove('font-bold'));
+                        button.classList.add('font-bold');
+                    }
+                });
+            };
+
+            initApp();
+        });
+    </script>
+</body>
+</html>
