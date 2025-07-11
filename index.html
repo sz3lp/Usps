@@ -3,257 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redmond USPS: Speak the Truth</title>
+    <title>USPS: Speak the Truth</title>
     <meta name="description" content="A private, protected portal for USPS employees to submit witness statements against abusive management. Your voice is protected.">
-    <meta property="og:title" content="Redmond USPS: Speak the Truth">
+    <meta property="og:title" content="USPS: Speak the Truth">
     <meta property="og:description" content="You're not alone. Your voice is protected. Submit a private statement.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="YOUR_LANDING_PAGE_URL_HERE"> <style>
-        :root {
-            --primary-color: #005f7f; /* Dark blue, similar to USPS but slightly softer */
-            --secondary-color: #e0f2f7; /* Light blue for background elements */
-            --text-color: #333;
-            --white: #fff;
-            --red-alert: #d9534f; /* For warnings */
-            --button-green: #4CAF50;
-            --button-green-hover: #45a049;
-        }
-
-        /* Basic Reset & Box Sizing */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
+    <meta property="og:url" content="YOUR_LANDING_PAGE_URL_HERE">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Tailwind Configuration (if needed beyond default classes) */
+        /* This can be extended in a tailwind.config.js file for a real project */
+        /* For this single HTML file, we'll use direct Tailwind classes */
         body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Align to top on larger screens */
-            min-height: 100vh; /* Ensure it takes full viewport height */
-            padding-bottom: 20px; /* Add some space at the bottom */
-        }
-
-        .container {
-            max-width: 800px;
-            width: 95%; /* Responsive width for all screen sizes */
-            margin: 20px auto; /* Centered with vertical margin */
-            background: var(--white);
-            padding: 20px; /* Adjusted padding for mobile */
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 20px;
-            line-height: 1.3; /* Better readability for headings */
-        }
-
-        h1 {
-            font-size: 1.8em; /* Base font size for mobile */
-        }
-
-        h2 {
-            font-size: 1.5em; /* Base font size for mobile */
-        }
-
-        p {
-            margin-bottom: 15px;
-            font-size: 1em; /* Base font size */
-        }
-
-        ul {
-            padding-left: 20px; /* Ensure lists are indented properly */
-            margin-bottom: 15px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .top-section, .final-section {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 25px 20px; /* Increased vertical padding */
-            border-radius: 6px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .top-section h1 {
-            color: var(--white);
-            font-size: 2em; /* Slightly larger in top section */
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-
-        .top-section .subhead {
-            font-weight: 500;
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 8px; /* Tighter spacing for subheads */
-        }
-        .top-section .subhead:last-child {
-            margin-bottom: 0;
-        }
-
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background-color: #eee;
-            margin: 40px 0; /* Consistent spacing */
-        }
-
-        .columns {
-            display: flex;
-            flex-direction: column; /* Stack columns by default on mobile */
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .column {
-            flex: 1;
-            background-color: var(--secondary-color);
-            padding: 20px;
-            border-radius: 6px;
-        }
-
-        .column h3 {
-            color: var(--primary-color);
-            margin-top: 0;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .social-proof {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 25px 20px; /* Increased vertical padding */
-            background-color: #f9f9f9;
-            border-radius: 6px;
-        }
-
-        .social-proof p {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .quote {
-            font-style: italic;
-            margin: 10px 0;
-            color: #555;
-            font-size: 0.95em; /* Slightly smaller for quotes */
-        }
-
-        .form-section {
-            padding: 20px;
-            background-color: #fdfdfd;
-            border-radius: 6px;
-            margin-bottom: 30px;
-        }
-
-        .form-section h2 {
-            margin-top: 0;
-        }
-
-        .final-section p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        .button {
-            display: block; /* Make button full width on mobile */
-            background-color: var(--button-green);
-            color: var(--white);
-            padding: 15px 20px; /* Consistent padding */
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            width: 100%; /* Full width on mobile */
-            max-width: 300px; /* Max width for larger screens if not full container */
-            margin: 20px auto 0 auto; /* Center button horizontally */
-        }
-
-        .button:hover {
-            background-color: var(--button-green-hover);
-        }
-
-        /* Subtle icon for safety/protection - needs an actual image URL */
-        /* You'd replace 'URL_TO_PROTECTION_ICON.png' with an actual image file */
-        .protection-icon {
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
-            width: 28px; /* Slightly larger for visibility */
-            height: 28px;
-            background-image: url('URL_TO_PROTECTION_ICON.png'); /* Replace with actual URL to a shield/lock/privacy icon */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-
-        /* Media query for larger screens (e.g., tablets and desktops) */
-        @media (min-width: 600px) {
-            h1 {
-                font-size: 2.5em; /* Larger heading on desktop */
-            }
-            h2 {
-                font-size: 2em; /* Larger heading on desktop */
-            }
-            .container {
-                padding: 30px; /* Restore original padding for larger screens */
-            }
-            .columns {
-                flex-direction: row; /* Columns side-by-side on larger screens */
-            }
-            .button {
-                display: inline-block; /* Back to inline-block for desktop */
-                width: auto; /* Allow button to size naturally */
-                padding: 15px 30px; /* Original padding */
-            }
+            font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
-<body>
-    <div class="container">
+<body class="bg-blue-50 text-gray-800 flex flex-col items-center min-h-screen p-4">
+    <div class="container max-w-3xl w-full mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8 my-8">
 
-        <section class="top-section">
-            <h1><span class="protection-icon"></span> You’re Not Alone. Your Voice Is Protected.</h1>
-            <p class="subhead">This is not a lawsuit.</p>
-            <p class="subhead">This is not public.</p>
-            <p class="subhead">This is not traceable by USPS.</p>
-            <p class="subhead">This is a private, protected witness statement to help remove abusive management.</p>
+        <section class="bg-blue-800 text-white p-6 md:p-8 rounded-lg mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-4 leading-tight">
+                <span class="inline-block align-middle mr-2 text-2xl md:text-3xl">🛡️</span> You’re Not Alone. Your Voice Is Protected.
+            </h1>
+            <p class="font-medium text-lg md:text-xl leading-relaxed mb-2">This is not a lawsuit.</p>
+            <p class="font-medium text-lg md:text-xl leading-relaxed mb-2">This is not public.</p>
+            <p class="font-medium text-lg md:text-xl leading-relaxed mb-2">This is not traceable by USPS.</p>
+            <p class="font-medium text-lg md:text-xl leading-relaxed">This is a private, protected witness statement to help remove abusive management.</p>
         </section>
 
-        <hr class="section-divider">
+        <hr class="border-t border-gray-200 my-10">
 
-        <h2>What This Is (and Isn’t)</h2>
-        <div class="columns">
-            <div class="column">
-                <h3>What This Is</h3>
-                <ul>
+        <h2 class="text-2xl md:text-3xl font-bold text-blue-800 text-center mb-6">What This Is (and Isn’t)</h2>
+        <div class="flex flex-col md:flex-row gap-6 mb-10">
+            <div class="flex-1 bg-blue-50 p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold text-blue-800 text-center mb-4">What This Is ✅</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
                     <li>A private form to confirm what you witnessed or experienced</li>
                     <li>Part of a formal federal EEO complaint that’s already filed</li>
                     <li>Your chance to stand with others who are speaking up</li>
                 </ul>
             </div>
-            <div class="column">
-                <h3>What This Isn’t</h3>
-                <ul>
+            <div class="flex-1 bg-blue-50 p-6 rounded-lg shadow-sm">
+                <h3 class="text-xl font-semibold text-blue-800 text-center mb-4">What This Isn’t ❌</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-700">
                     <li>Not a lawsuit</li>
                     <li>Not shared with USPS unless legally required</li>
                     <li>Not public or on record unless you choose</li>
@@ -261,36 +57,162 @@
             </div>
         </div>
 
-        <hr class="section-divider">
+        <hr class="border-t border-gray-200 my-10">
 
-        <section class="social-proof">
-            <h2>Your Voice Matters</h2>
-            <p><strong>Already 12 carriers have submitted.</strong> We’re stronger together.</p>
-            <p class="quote">“I saw it too. Finally someone’s standing up.”</p>
-            <p class="quote">“I never reported it, but they did the same thing to me.”</p>
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-800 text-center mb-6">What is Workplace Harassment?</h2>
+            <p class="text-gray-700 mb-6">
+                Workplace harassment is unwelcome conduct based on a protected characteristic. It's not just about yelling; it's about creating a hostile work environment or treating someone unfairly based on their identity.
+            </p>
+            <div class="space-y-6">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-600">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Discrimination Defined</h3>
+                    <p class="text-gray-700">
+                        Harassment often stems from <strong>discrimination</strong>—unwelcome conduct based on someone's:
+                    </p>
+                    <ul class="list-disc list-inside ml-4 mt-2 text-gray-700 space-y-1">
+                        <li>Race, Color, Religion</li>
+                        <li>Sex (including pregnancy, sexual orientation, or gender identity)</li>
+                        <li>National Origin, Age (40 or older)</li>
+                        <li>Disability, or Genetic Information</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-600">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Hostile Work Environment</h3>
+                    <p class="text-gray-700">
+                        This occurs when severe or pervasive conduct alters the conditions of employment and creates an intimidating, hostile, or offensive working environment. Examples include:
+                    </p>
+                    <ul class="list-disc list-inside ml-4 mt-2 text-gray-700 space-y-1">
+                        <li>Persistent unwelcome jokes or comments about a protected characteristic.</li>
+                        <li>Offensive pictures, emails, or gestures.</li>
+                        <li>Intimidation, ridicule, or insults.</li>
+                        <li>Physical assaults or threats.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-blue-600">
+                    <h3 class="text-xl font-semibold text-blue-800 mb-3">Quid Pro Quo Harassment (Sexual)</h3>
+                    <p class="text-gray-700">
+                        This specifically refers to situations where employment benefits (like promotions, raises, or continued employment) are made conditional on sexual favors.
+                    </p>
+                </div>
+            </div>
         </section>
 
-        <hr class="section-divider">
+        <hr class="border-t border-gray-200 my-10">
 
-        <section class="form-section">
-            <h2>Submit Your Statement</h2>
-            <p>They count on silence. We count on each other.</p>
-            <p>It takes 2 minutes. It could change everything.</p>
-
-            <p style="text-align: center; margin-top: 30px;">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSejQVGxJ4mtq997eFwlNmFoDtidrkOapca-KEsxt3Tznbb4Ww/viewform?usp=sharing&ouid=115957246971291475516" target="_blank" rel="noopener noreferrer" class="button">Submit My Statement</a>
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-800 text-center mb-6">Is Your Supervisor Crossing the Line?</h2>
+            <p class="text-gray-700 mb-6">
+                Beyond traditional harassment, supervisors can engage in misconduct or abuse of authority that is illegal or against policy. Consider if you've experienced any of the following:
             </p>
+            <div class="space-y-6">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-red-600">
+                    <h3 class="text-xl font-semibold text-red-800 mb-3">Requests to Violate Policy or Law</h3>
+                    <ul class="list-disc list-inside ml-4 mt-2 text-gray-700 space-y-1">
+                        <li>Asking you to falsify documents, ignore safety protocols, or work off the clock without pay.</li>
+                        <li>Instructing you to discriminate against a coworker or customer based on a protected characteristic.</li>
+                        <li>Pressuring you to retaliate against someone who filed a complaint or raised a concern.</li>
+                    </ul>
+                </div>
 
-            </section>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-red-600">
+                    <h3 class="text-xl font-semibold text-red-800 mb-3">Abuse of Authority / Misconduct</h3>
+                    <ul class="list-disc list-inside ml-4 mt-2 text-gray-700 space-y-1">
+                        <li>Misusing their position for personal gain or to unfairly disadvantage you (e.g., denying leave without valid reason, extreme favoritism).</li>
+                        <li>Engaging in excessive monitoring or micromanagement beyond what's reasonable for your role.</li>
+                        <li>Threatening or intimidating you to perform tasks that are unsafe or outside your job description.</li>
+                    </ul>
+                </div>
 
-        <hr class="section-divider">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-red-600">
+                    <h3 class="text-xl font-semibold text-red-800 mb-3">Retaliation</h3>
+                    <p class="text-gray-700">
+                        <strong>Any negative action</strong> taken by a supervisor <em>after</em> you have complained about harassment or discrimination (even informally) is illegal. This includes:
+                    </p>
+                    <ul class="list-disc list-inside ml-4 mt-2 text-gray-700 space-y-1">
+                        <li>Sudden negative performance reviews.</li>
+                        <li>Undesirable shift changes or assignments.</li>
+                        <li>Denial of promotion or training opportunities.</li>
+                        <li>Increased scrutiny or disciplinary actions.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-        <section class="final-section">
-            <p>They count on silence. We count on each other.</p>
-            <p>Submit your statement. It takes 2 minutes. It could change everything.</p>
-            <p style="text-align: center;">
-                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSejQVGxJ4mtq997eFwlNmFoDtidrkOapca-KEsxt3Tznbb4Ww/viewform?usp=sharing&ouid=115957246971291475516" target="_blank" rel="noopener noreferrer" class="button">Submit My Statement</a>
+        <hr class="border-t border-gray-200 my-10">
+
+        <section class="text-center mb-10 bg-gray-50 p-6 rounded-lg shadow-sm">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-800 mb-4">Your Voice Matters</h2>
+            <p class="text-xl font-semibold text-blue-700 mb-4"><strong>Already 12 carriers have submitted.</strong> We’re stronger together.</p>
+            <p class="italic text-gray-600 mb-2">“I saw it too. Finally someone’s standing up.”</p>
+            <p class="italic text-gray-600">“I never reported it, but they did the same thing to me.”</p>
+        </section>
+
+        <hr class="border-t border-gray-200 my-10">
+
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-800 text-center mb-6">Submit Your Statement</h2>
+            <p class="text-gray-700 text-center mb-4">They count on silence. We count on each other.</p>
+            <p class="text-gray-700 text-center mb-8">It takes 2 minutes. It could change everything.</p>
+
+            <div class="text-center">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd8ydh84TWiNW0AlO-9bmlXX8hxeLuj4zX5TZRossSlS4XurQ/viewform?usp=header" target="_blank" rel="noopener noreferrer"
+                   class="inline-block bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-xl shadow-lg hover:bg-green-700 transition-colors duration-300 transform hover:scale-105">
+                    Submit My Statement
+                </a>
+            </div>
+        </section>
+
+        <hr class="border-t border-gray-200 my-10">
+
+        <section class="mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-blue-800 text-center mb-6">What to Do Next: Your Rights & Steps</h2>
+            <p class="text-gray-700 mb-6">
+                If you believe you are experiencing harassment, discrimination, or illegal conduct, taking proactive steps is crucial to protecting yourself and your rights.
             </p>
+            <div class="space-y-6">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-purple-600">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-3">Document Everything Meticulously</h3>
+                    <p class="text-gray-700">
+                        Start a private, detailed log of every incident. Include:
+                    </p>
+                    <ul class="list-disc list-inside ml-4 mt-2 text-gray-700 space-y-1">
+                        <li><strong>Date and Time:</strong> When did it happen?</li>
+                        <li><strong>Location:</strong> Where did it occur?</li>
+                        <li><strong>Specifics:</strong> What exactly was said or done? Be precise.</li>
+                        <li><strong>Witnesses:</strong> Who else was present?</li>
+                        <li><strong>Impact:</strong> How did it make you feel or affect your work?</li>
+                        <li><strong>Evidence:</strong> Keep copies of emails, texts, or other relevant documents.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-purple-600">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-3">Know Your Crucial Deadlines</h3>
+                    <p class="text-gray-700">
+                        The most critical deadline is to <strong>contact an EEO Counselor within 45 calendar days</strong> of the discriminatory act. Missing this deadline can result in your case being dismissed, regardless of its merits.
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm border-l-4 border-purple-600">
+                    <h3 class="text-xl font-semibold text-purple-800 mb-3">Seek Professional Guidance</h3>
+                    <p class="text-gray-700">
+                        Consider consulting with a union representative or an attorney specializing in federal employment law. They can provide personalized advice and help you understand your options.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-blue-800 text-white p-6 md:p-8 rounded-lg text-center">
+            <p class="text-xl md:text-2xl font-medium mb-4">They count on silence. We count on each other.</p>
+            <p class="text-lg md:text-xl font-medium mb-8">Submit your statement. It takes 2 minutes. It could change everything.</p>
+            <div class="text-center">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd8ydh84TWiNW0AlO-9bmlXX8hxeLuj4zX5TZRossSlS4XurQ/viewform?usp=header" target="_blank" rel="noopener noreferrer"
+                   class="inline-block bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-xl shadow-lg hover:bg-green-700 transition-colors duration-300 transform hover:scale-105">
+                    Submit My Statement
+                </a>
+            </div>
         </section>
 
     </div>
